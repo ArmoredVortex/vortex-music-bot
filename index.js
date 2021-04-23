@@ -10,7 +10,7 @@ client.commands = new Collection();
 client.config = require('./config/config.js')
 
 fs.readdirSync('./commands').forEach(dir => {
-    const commands = readDirSync(`./commands/${dir}`).filter(files => files.endsWith('.js'));
+    const commands = fs.readdirSync(`./commands/${dir}`).filter(files => files.endsWith('.js'));
     for (const file of commands) {
         const command = require(`./commands/${dir}/${file}`);
         console.log(`Loaded ${command.name}`);
@@ -28,7 +28,7 @@ for (const file of events) {
 };
 
 for (const file of player) {
-    console.log(`Loading ${file} player event`);
+    console.log(`Loaded ${file} event`);
     const event = require(`./player/${file}`);
     client.player.on(file.split(".")[0], event.bind(null, client));
 };

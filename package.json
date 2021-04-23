@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ArmoredVortex/vortex-music-bot#readme",
   "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
     "discord-player": "^3.4.0",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
