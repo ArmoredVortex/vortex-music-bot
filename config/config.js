@@ -1,6 +1,6 @@
 module.exports = {
     discord: {
-        prefix: '>',
+        prefix: 'v!',
         activity: {
             name: 'Music',
             type: 'PLAYING'
