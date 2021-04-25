@@ -1,5 +1,6 @@
 module.exports = {
     name: 'queue',
+    description: 'Lists the current guild queue',
     execute(client, message) {
         if (!message.member.voice.channel) return message.channel.send(`You can only execute this command after joining a voice channel`);
 

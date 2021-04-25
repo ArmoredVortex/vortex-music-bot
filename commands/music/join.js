@@ -1,8 +1,8 @@
 module.exports = {
     name: 'join',
+    description: 'Connects/ Moves the bot to a voice channel',
     execute(client,message) {
         if (!message.member.voice.channel) return message.channel.send(`You can only execute this command after joining a voice channel`);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(`You are Not in the same voice as the bot`);
 
         try {
             message.member.voice.channel.join();
