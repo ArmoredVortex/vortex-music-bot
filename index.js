@@ -1,3 +1,6 @@
+// Heroku Deploy
+http.createServer(onRequest).listen(process.env.PORT || 6000)
+
 require('dotenv').config();
 
 const fs = require('fs');
