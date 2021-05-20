@@ -19,7 +19,8 @@ module.exports = {
     	  	return message.channel.send('Expected format `00:00:00`');
     	  }
     	  try{
-            client.player.seek(message,ms)    
+            client.player.seek(message,ms)
+	    message.channel.send('Jumping to timestamp `' + args[0] + '`');    
         } catch(err) {
             message.channel.send(`An Error occured. Please DM ArmoredVortex#8513 on Discord or raise and issue on Github and provide The error given below:-
 `+"```"+err+"```")
