@@ -1,5 +1,6 @@
 var gtts = require('node-gtts')('en');
 var path = require('path');
+var mp3Duration = require('mp3-duration');
 module.exports = {
 	name: 'tts-play',
 	description: 'Converts Text provided to audio and plays it in voiceChannel',
@@ -12,13 +13,25 @@ module.exports = {
 		}
 		let text = args.join(' ');
 		var filepath = path.join(__dirname, 'out.mp3');
- 		message.channel.send('Processing =>'+'`'+text+'`');
-		gtts.save(filepath, text , () => {
-  			const { voice } = message.member;
-  			message.channel.send(`Joined **${voice.channel.name}**`);
-  			voice.channel.join().then((connection)=>{
-  				connection.play(path.join(__dirname,'out.mp3'));
-  			})
+		message.channel.send('Processing =>'+'`'+text+'`').then(processing=>{
+			processing.delete({timeout:5000})
 		})
+ 		try {
+			gtts.save(filepath, text , () => {
+	  			const { voice } = message.member;
+	  			message.channel.send(`Playing in **${voice.channel.name}**`);
+	  			voice.channel.join().then((connection)=>{
+	  				connection.play(path.join(__dirname,'out.mp3'),()=>{})
+	  				mp3Duration(path.join(__dirname,'out.mp3'),(err,duration)=>{
+	  					setTimeout(()=>{
+	  						voice.channel.leave();
+	  					},(duration * 1000)+200)
+	  				})
+	  			})
+			})
+		} catch(err) {
+            message.channel.send(`An Error occured. Please DM ArmoredVortex#8513 on Discord or raise and issue on Github and provide The error given below:-
+`+"```"+err+"```")
+        }
 	}
 }
