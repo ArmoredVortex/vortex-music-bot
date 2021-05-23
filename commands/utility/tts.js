@@ -13,7 +13,7 @@ module.exports = {
 		gtts.save(filepath, text , () => {
   			message.channel.send("Here's the result:", {
   				files: [
-    				"commands/utility/out.mp3"
+    				path.join(__dirname,'out.mp3')
   					]
 }			);
 		})
