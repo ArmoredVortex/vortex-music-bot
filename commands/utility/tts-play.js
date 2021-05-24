@@ -11,6 +11,9 @@ module.exports = {
 		if(!args[0]){
 			message.channel.send('No Text provided');
 		}
+		if(client.player.isPlaying){
+	  		return message.channel.send("There is music already playing in the server")
+	  	}
 		let text = args.join(' ');
 		var filepath = path.join(__dirname, 'out.mp3');
 		message.channel.send('Processing =>'+'`'+text+'`').then(processing=>{
@@ -19,9 +22,9 @@ module.exports = {
  		try {
 			gtts.save(filepath, text , () => {
 	  			const { voice } = message.member;
-	  			message.channel.send(`Playing in **${voice.channel.name}**`);
 	  			voice.channel.join().then((connection)=>{
-	  				connection.play(path.join(__dirname,'out.mp3'),()=>{})
+	  				connection.play(path.join(__dirname,'out.mp3'))
+	  				message.channel.send(`Playing in **${voice.channel.name}**`);
 	  				mp3Duration(path.join(__dirname,'out.mp3'),(err,duration)=>{
 	  					setTimeout(()=>{
 	  						voice.channel.leave();
@@ -35,3 +38,22 @@ module.exports = {
         }
 	}
 }
+
+// if (client.player.isPlaying) {
+				// 	client.player.pause(message);
+				// 	message.channel.send('Song Paused')
+				// 	voice.channel.join().then(connection => {
+				// 		connection.play(path.join(__dirname,'out.mp3'),()=>{
+				// 			message.channel.send('test')
+				// 			mp3Duration(path.join(__dirname,'out.mp3'),(err,duration)=>{
+	  	// 						setTimeout(()=>{
+	  	// 							client.player.resume(message);
+    //         						client.player.pause(message);
+    //         						client.player.resume(message);
+    //         						message.channel.send('Resuming Music')
+	  	// 						},(duration * 1000)+200)
+	  	// 					})
+				// 		})
+				// 	})
+				// 	return;
+				// }
