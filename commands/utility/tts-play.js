@@ -11,7 +11,7 @@ module.exports = {
 		if(!args[0]){
 			message.channel.send('No Text provided');
 		}
-		if(client.player.isPlaying){
+		if(client.player.isPlaying(message)){
 	  		return message.channel.send("There is music already playing in the server")
 	  	}
 		let text = args.join(' ');
@@ -38,22 +38,3 @@ module.exports = {
         }
 	}
 }
-
-// if (client.player.isPlaying) {
-				// 	client.player.pause(message);
-				// 	message.channel.send('Song Paused')
-				// 	voice.channel.join().then(connection => {
-				// 		connection.play(path.join(__dirname,'out.mp3'),()=>{
-				// 			message.channel.send('test')
-				// 			mp3Duration(path.join(__dirname,'out.mp3'),(err,duration)=>{
-	  	// 						setTimeout(()=>{
-	  	// 							client.player.resume(message);
-    //         						client.player.pause(message);
-    //         						client.player.resume(message);
-    //         						message.channel.send('Resuming Music')
-	  	// 						},(duration * 1000)+200)
-	  	// 					})
-				// 		})
-				// 	})
-				// 	return;
-				// }
